@@ -1,0 +1,47 @@
+{
+    "name": "chinleung/laravel-terminal-notification-channel",
+    "description": "Terminal notification channel for Laravel.",
+    "keywords": [
+        "chinleung",
+        "laravel-terminal-notification-channel"
+    ],
+    "homepage": "https://github.com/chinleung/laravel-terminal-notification-channel",
+    "license": "MIT",
+    "type": "library",
+    "authors": [
+        {
+            "name": "Chin Leung",
+            "email": "hello@chinleung.com",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": "^8.2",
+        "illuminate/notifications": "^10.0",
+        "illuminate/support": "^10.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "ChinLeung\\TerminalNotificationChannel\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "ChinLeung\\TerminalNotificationChannel\\Tests\\": "tests"
+        }
+    },
+    "scripts": {
+        "test": "vendor/bin/phpunit",
+        "test-coverage": "vendor/bin/phpunit --coverage-html coverage"
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "ChinLeung\\TerminalNotificationChannel\\TerminalNotificationChannelServiceProvider"
+            ]
+        }
+    }
+}
