@@ -27,7 +27,7 @@ class Router
      */
     protected function compileCommand(array $options): string
     {
-        $command = Arr::get($options, 'path');
+        $command = 'terminal-notifier';
 
         foreach ($options as $option => $value) {
             $command .= sprintf(
@@ -48,7 +48,6 @@ class Router
         $config = $this->application->config;
 
         $options = [
-            'path' => $config->get('terminal-notification.path'),
             'title' => $config->get('terminal-notification.title'),
             'appIcon' => $config->get('terminal-notification.icon'),
             'sound' => $config->get('terminal-notification.sound'),
@@ -97,6 +96,10 @@ class Router
     public function send($notifiable, Notification $notification): void
     {
         if ($this->application->environment() !== 'local') {
+            return;
+        }
+
+        if (Process::run('which terminal-notifier')->exitCode() === 1) {
             return;
         }
 
