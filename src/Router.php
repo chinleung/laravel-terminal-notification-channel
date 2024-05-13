@@ -2,7 +2,6 @@
 
 namespace ChinLeung\TerminalNotificationChannel;
 
-use Exception;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\Queue\Job;
 use Illuminate\Contracts\Routing\UrlGenerator;
@@ -28,7 +27,7 @@ class Router
      */
     protected function compileCommand(array $options): string
     {
-        $command = 'terminal-notifier';
+        $command = Arr::get($options, 'path');
 
         foreach ($options as $option => $value) {
             $command .= sprintf(
@@ -49,6 +48,7 @@ class Router
         $config = $this->application->config;
 
         $options = [
+            'path' => $config->get('terminal-notification.path'),
             'title' => $config->get('terminal-notification.title'),
             'appIcon' => $config->get('terminal-notification.icon'),
             'sound' => $config->get('terminal-notification.sound'),
@@ -98,10 +98,6 @@ class Router
     {
         if ($this->application->environment() !== 'local') {
             return;
-        }
-
-        if (Process::run('which terminal-notifier')->exitCode() === 1) {
-            throw new Exception('The command terminal-notifier is not found.');
         }
 
         $options = $this->compileOptions($notification);
