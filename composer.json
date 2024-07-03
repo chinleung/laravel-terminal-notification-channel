@@ -17,8 +17,8 @@
     ],
     "require": {
         "php": "^8.2",
-        "illuminate/notifications": "^10.0",
-        "illuminate/support": "^10.0"
+        "illuminate/notifications": "^10.0|^11.0",
+        "illuminate/support": "^10.0|^11.0"
     },
     "autoload": {
         "psr-4": {
